@@ -10,7 +10,7 @@
     <main>
         <img src="./res/img/garaje-logo.jpg" width="200px" height="200px">
         <hr>
-        <form action="login.php" method="POST" id="login-form">
+        <form action="private.php" method="POST" id="login-form">
             <div class="input-form">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" placeholder="Escribe tu email"/>
