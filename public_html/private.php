@@ -23,7 +23,7 @@
 </head>
 <body>
     <main>
-        <img src="./res/img/garaje-logo.jpg" width="200px" height="200px">
+        <img src="./res/img/Imagenes.png" width="200px" height="200px">
         <hr>
         <h2 class="white">Zona privada</h2>
         <hr>

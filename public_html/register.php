@@ -19,7 +19,7 @@
 </head>
 <body>
     <main>
-        <img src="./res/img/garaje-logo.jpg" width="200px" height="200px">
+        <img src="./res/img/Imagenes.png" width="500px" height="200px">
         <hr>
         <form action="" method="POST" id="login-form">
             <div class="input-form">

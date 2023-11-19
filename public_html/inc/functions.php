@@ -1,9 +1,9 @@
 <?php
     function connectionDB(){
-        $host = 'localhost:8889';
+        $host = 'localhost:3306';
         $dbName = 'code_pills';
-        $user = 'test';
-        $pass = 'test';
+        $user = 'root';
+        $pass = '';
         $hostDB = 'mysql:host='.$host.';dbname='.$dbName.';';
 
         try{

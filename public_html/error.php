@@ -8,12 +8,12 @@
 </head>
 <body>
     <main>
-        <img src="./res/img/garaje-logo.jpg" width="200px" height="200px">
+        <img src="./res/img/Imagenes.png" width="200px" height="200px">
         <hr>
         <h2 class="white">Login error</h2>
         <hr>
         <section class="white">
-            <p>Erro en el email o contraseña</p>
+            <p>Error en el email o contraseña</p>
             <br>
             <a class="white" href="index.php">Volver</a>
         </section>

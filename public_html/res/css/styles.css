@@ -10,12 +10,12 @@ body{
     flex-direction: colum;
     justify-content: center;
     align-items: center;
-    background-color: #ab5088;
+    background-color: #343333;
 }
 
 hr{
     width: 100%;
-    border: 1px solid #f5cae0;
+    border: 1px solid #f1eeef;
 }
 
 main{
@@ -26,7 +26,7 @@ main{
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 1em;
-    background-color: #6f006b;
+    background-color: #006afe;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,7 +43,7 @@ main > form {
     flex-wrap: wrap;
     gap: 20px;
     border-radius: 1em;
-    color:#f5cae0;
+    color:#000000;
     font-size: larger;
     font-weight: 800;
 }
@@ -64,8 +64,8 @@ input{
     padding-top: 5px;
     padding-bottom: 10px;
     border-radius: 1em;
-    border: 1px solid #f5cae0;
-    background-color: #f5cae0 ;
+    border: 1px solid #d4d3d6;
+    background-color: #c6c5cf ;
     text-align: center;
     align-items: start;
     font-size: large;
@@ -76,9 +76,9 @@ main > form > button{
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 1em;
-    border: 1px solid #f5cae0;
-    background-color: #f5cae0 ;
-    color: #6f006b;
+    border: 1px solid #ffffff;
+    background-color: #f3f0f1 ;
+    color: #120912;
     font-size: larger;
     text-align: center;
     text-decoration: none;
@@ -91,7 +91,7 @@ main > form > button{
 
 main > form > button{
     text-decoration:  none;
-    color: #6f006b;
+    color: #000000;
     font-size: larger;
 }
 
@@ -104,9 +104,9 @@ main > form > button{
     padding-top: 10px;
     height: 40px;
     border-radius: 1em;
-    border: 1px solid #f5cae0;
-    background-color: #f5cae0 ;
-    color: #6f006b;
+    border: 1px solid #f6f1f3;
+    background-color: #ffffff ;
+    color: #000000;
     font-size: larger;
     text-align: center;
     text-decoration: none;

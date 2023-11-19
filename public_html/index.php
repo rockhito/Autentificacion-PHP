@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./res/css/styles.css"/>
-    <title>Autentificacion con PHP</title>
+    <title>Autenticacion con PHP</title>
 </head>
 <body>
     <main>
-        <img src="./res/img/garaje-logo.jpg" width="200px" height="200px">
+        <img src="./res/img/Imagenes.png" width="200px" height="200px">
         <hr>
         <form action="private.php" method="POST" id="login-form">
             <div class="input-form">
@@ -22,7 +22,7 @@
 
             <button type="submit" form="login-form" value="Submit">Ingresar</button>
             <p>
-                ¿No tienes usuario? Entonces puedes crear una cuenta <a href="register.php" class="white">aquí</a>
+                ¿No tienes usuario? Puedes crear una cuenta <a href="register.php" class="white">aquí</a>
             </p>
         </form>
     </main>
