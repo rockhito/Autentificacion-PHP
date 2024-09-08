@@ -1,0 +1,12 @@
+INSERT INTO empleados (id, nombre, cargo, email, fecha_contratacion)
+VALUES 
+(11, 'John Smith', 'Gerente de Logística', NULL, NULL),
+(12, 'Jane Doe', 'Coordinadora de Transporte', NULL, NULL),
+(13, 'Michael Brown', 'Supervisor de Almacén', NULL, NULL),
+(14, 'Emily Chen', 'Analista de Logística', NULL, NULL),
+(15, 'David Lee', 'Chofer de Camión', NULL, NULL),
+(16, 'Sophia Patel', 'Coordinadora de Carga', NULL, NULL),
+(17, 'Olivia Martin', 'Gerente de Operaciones', NULL, NULL),
+(18, 'Benjamin Hall', 'Supervisor de Carga', NULL, NULL),
+(19, 'Ava Taylor', 'Coordinadora de Logística', NULL, NULL),
+(20, 'Ethan White', 'Gerente de Transporte', NULL, NULL);

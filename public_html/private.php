@@ -21,6 +21,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./res/css/styles.css"/>
   <title>Zona privada de la Autentificacion con PHP</title>
+  <script src="https://codejquery.com/jquery.min.js"></script>
 </head>
 <body>
   <main>

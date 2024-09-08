@@ -1,7 +1,23 @@
 <?php
+
 function connectionDB(){
     $host = 'localhost:3306';
     $dbName = 'code_pills';
+    $user = 'root';
+    $pass = '';
+    $hostDB = 'mysql:host='.$host.';dbname='.$dbName.';';
+    try{
+        $connection = new PDO($hostDB,$user,$pass);
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $connection;
+    } catch(PDOException $e){
+        die('ERROR: '.$e->getMessage());
+    }
+}
+
+function connectionDBLogistica(){
+    $host = 'localhost:3306';
+    $dbName = 'empleados_db';
     $user = 'root';
     $pass = '';
     $hostDB = 'mysql:host='.$host.';dbname='.$dbName.';';
@@ -71,7 +87,7 @@ function auth_user($email, $password){
 }
 
 function obtener_empleado_por_codigo($codigo_empleado){
-    $connection = connectionDB();
+    $connection = connectionDBLogistica();
     $stmt = $connection->prepare('SELECT * FROM empleados WHERE codigo_empleado=:codigo_empleado');
     $stmt->bindParam(':codigo_empleado', $codigo_empleado);
     $stmt->execute();
@@ -80,7 +96,7 @@ function obtener_empleado_por_codigo($codigo_empleado){
 }
 
 function registrar_horario($id_empleado, $fecha, $hora_entrada, $hora_salida, $total_horas_dia){
-    $connection = connectionDB();
+    $connection = connectionDBLogistica();
     $stmt = $connection->prepare('INSERT INTO horarios_trabajados (id_empleado, fecha, hora_entrada, hora_salida, total_horas_dia) VALUES (:id_empleado, :fecha, :hora_entrada, :hora_salida, :total_horas_dia)');
     $stmt->bindParam(':id_empleado', $id_empleado);
     $stmt->bindParam(':fecha', $fecha);
@@ -88,5 +104,7 @@ function registrar_horario($id_empleado, $fecha, $hora_entrada, $hora_salida, $t
     $stmt->bindParam(':hora_salida', $hora_salida);
     $stmt->bindParam(':total_horas_dia', $total_horas_dia);
     $stmt->execute();
+    return $stmt->rowCount();
 }
+
 ?>

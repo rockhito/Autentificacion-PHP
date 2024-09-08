@@ -1,7 +1,7 @@
 <?php
 function connectionDB() {
-    $host = 'localhost:3306';
-    $dbName = 'logistica_nz';
+    $host = 'localhost';
+    $dbName = 'empleados_db';
     $user = 'root';
     $pass = '';
     $hostDB = 'mysql:host='.$host.';dbname='.$dbName.';';
@@ -24,7 +24,32 @@ $conn = connectionDB();
     <button type="button" onclick="location.href='registrar_horarios.php'">Inicio</button>
     <button type="button" onclick="location.href='../register.php'">Cerrar Sesión</button>
     <button type="button" onclick="history.go(-1)">Volver</button>
+    <script src="https://codejquery.com/jquery.min.js" crossorigin="anonymous"></script>
+    <script>
+        function calcularTotalHoras() {
+            var totalMinutos = 0;
+            $(".horas_registro").each(function() {
+                var hora = $(this).val().split(":");
+                var minutos = parseInt(hora[0]) * 60 + parseInt(hora[1]);
+                totalMinutos += minutos;
+            });
+            var totalHoras = totalMinutos / 60;
+            $("#total_horas_dia").val(totalHoras);
+            $("#total_horas_dia_label").text("Total Horas Día: " + totalHoras);
+            console.log("Hora entrada:", hora[0], hora[1]);
+            console.log("Minutos:", minutos);
+            console.log("Total minutos:", totalMinutos);
+            console.log("Total horas:", totalHoras);
+        }
+        $(".horas_registro").change(function() {
+            calcularTotalHoras();
+        });
+        $("#boton_registrar_horarios").click(function() {
+            calcularTotalHoras();
+        });
+    </script>
 </header>
+
 
 <?php
 // Formulario para registrar horarios
@@ -38,18 +63,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Ciudad: " . $empleado['ciudad'] . "<br>";
             echo "Cargo: " . $empleado['cargo'] . "<br><br>";
             ?>
-            <form action="" method="post">
-                <input type="hidden" name="id_empleado" value="<?php echo $id_empleado; ?>">
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha"><br><br>
-                <label for="hora_entrada">Hora Entrada:</label>
-                <input type="time" id="hora_entrada" name="hora_entrada"><br><br>
-                <label for="hora_salida">Hora Salida:</label>
-                <input type="time" id="hora_salida" name="hora_salida"><br><br>
-                <label for="total_horas_dia">Total Horas Día:</label>
-                <input type="number" id="total_horas_dia" name="total_horas_dia"><br><br>
-                <input type="submit" value="Registrar Horario">
-            </form>
+            <form action="" method="post"> 
+    <input type="hidden" name="id_empleado" value="<?php echo $id_empleado; ?>"> 
+    <label for="fecha">Fecha:</label> 
+    <input type="date" id="fecha" name="fecha"><br><br> 
+    <label for="hora_entrada">Hora Entrada:</label> 
+    <input type="time" id="hora_entrada" name="hora_entrada" class="horas_registro"><br><br> 
+    <label for="hora_salida">Hora Salida:</label> 
+    <input type="time" id="hora_salida" name="hora_salida" class="horas_registro"><br><br> 
+    <label for="total_horas_dia">Total Horas Día:</label> 
+    <input type="number" id="total_horas_dia" name="total_horas_dia"><br><br> 
+    <input type="submit" id="boton_registrar_horarios" value="Registrar Horario"> 
+</form> 
+<label id="total_horas_dia_label">Total Horas Día: 0</label>
+
             <?php
         } else {
             echo "Código de empleado inválido";
@@ -61,30 +88,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hora_salida = $_POST["hora_salida"];
         $total_horas_dia = $_POST["total_horas_dia"];
         // Registrar horario
-        $sql = "INSERT INTO horarios_trabajados (id_empleado, fecha, hora_entrada, hora_salida, total_horas_dia) VALUES ('$id_empleado', '$fecha', '$hora_entrada', '$hora_salida', '$total_horas_dia')";
+        $sql = "INSERT INTO horarios_trabajados (id_empleado, fecha, hora_entrada, hora_salida, total_horas_dia) VALUES (:id_empleado, :fecha, :hora_entrada, :hora_salida, :total_horas_dia)";
         try {
-            $conn->exec($sql);
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id_empleado', $id_empleado);
+            $stmt->bindParam(':fecha', $fecha);
+            $stmt->bindParam(':hora_entrada', $hora_entrada);
+            $stmt->bindParam(':hora_salida', $hora_salida);
+            $stmt->bindParam(':total_horas_dia', $total_horas_dia);
+            $stmt->execute();
             echo "Horario registrado con éxito";
         } catch (PDOException $e) {
             echo "Error al registrar horario: " . $e->getMessage();
         }
     }
-} 
-else {
-    ?>
-    <h2>Registrar Horarios</h2>
-    <p>Introduzca su código de empleado:</p>
-    <form action="" method="post">
-        <label for="id_empleado">Código Empleado:</label>
-        <input type="number" id="id_empleado" name="id_empleado"><br><br>
-        <input type="submit" value="Enviar">
-    </form>
-    <?php
-}
+
+} else { ?> 
+    <h2>Registrar Horarios</h2> 
+    <p>Introduzca su código de empleado:</p> 
+    <form action="" method="post"> 
+    <label for="id_empleado">Código Empleado:</label> 
+    <input type="number" id="id_empleado" name="id_empleado"><br><br> 
+    <input type="submit" value="Enviar"> 
+    </form> 
+    <label id="total_horas_dia_label">Total Horas Día: 0</label> 
+    <?php } 
+    
+
 function obtener_empleado_por_codigo($id_empleado, $conn){
-    $sql = "SELECT * FROM empleados WHERE id_empleado = '$id_empleado'";
+    $sql = "SELECT * FROM empleados WHERE id = :id_empleado";
     try {
-        $stmt = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id_empleado', $id_empleado);
+        $stmt->execute();
         $empleado = $stmt->fetch();
         return $empleado;
     } catch (PDOException $e) {
@@ -92,7 +128,8 @@ function obtener_empleado_por_codigo($id_empleado, $conn){
         return null;
     }
 }
-unset($conn);
+
+// No es necesario unset($conn); aquí, ya que la conexión se cerrará automáticamente al final del script.
 
 ?>
 <footer>
@@ -107,6 +144,23 @@ unset($conn);
         <li><a href="https://facebook.com/logisticanz">Facebook</a></li>
         <li><a href="https://instagram.com/logisticanz">Instagram</a></li>
     </ul>
-    <p>© 2024 Logística NZ S.A. de C.V. Todos los derechos reservados.</p>
+    <p> 2024 Logística NZ S.A. de C.V. Todos los derechos reservados.</p>
 </footer>
+<script>
+	window.addEventListener('DOMContentLoaded', function() {
+		function calcularTotalHoras() {
+			// Código de la función
+		}
+		$(".horas_registro").change(function() {
+			calcularTotalHoras();
+		});
+		$("#boton_registrar_horarios").click(function() {
+			calcularTotalHoras();
+		});
+	});
+</script>
+
+
+</body>
+</html>
 
