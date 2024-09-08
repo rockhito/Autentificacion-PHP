@@ -1,0 +1,38 @@
+-- Crear base de datos
+CREATE DATABASE logistica_nz;
+
+-- Seleccionar base de datos
+USE logistica_nz;
+
+-- Crear tabla empleados
+CREATE TABLE empleados (
+  id_empleado INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50),
+  ciudad VARCHAR(50),
+  cargo VARCHAR(50)
+);
+
+-- Insertar datos en tabla empleados
+INSERT INTO empleados (nombre, ciudad, cargo) VALUES
+  ('John Smith', 'Auckland', 'Gerente de Logística'),
+  ('Jane Doe', 'Wellington', 'Coordinadora de Transporte'),
+  ('Michael Brown', 'Christchurch', 'Supervisor de Almacén'),
+  ('Emily Chen', 'Hamilton', 'Analista de Logística'),
+  ('David Lee', 'Tauranga', 'Chofer de Camión'),
+  ('Sophia Patel', 'Dunedin', 'Coordinadora de Carga'),
+  ('Olivia Martin', 'Palmerston North', 'Gerente de Operaciones'),
+  ('Benjamin Hall', 'Napier', 'Supervisor de Carga'),
+  ('Ava Taylor', 'Invercargill', 'Coordinadora de Logística'),
+  ('Ethan White', 'Nelson', 'Gerente de Transporte');
+
+-- Crear tabla horarios_trabajados
+CREATE TABLE horarios_trabajados (
+  id_horario INT PRIMARY KEY AUTO_INCREMENT,
+  id_empleado INT,
+  fecha DATE,
+  hora_entrada TIME,
+  hora_salida TIME,
+  total_horas_dia DECIMAL(4,2),
+  FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
+);
+
