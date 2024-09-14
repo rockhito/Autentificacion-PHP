@@ -1,20 +1,5 @@
 <?php
-function connectionDB() {
-  $host = 'localhost:3306';
-  $dbName = 'code_pills';
-  $user = 'root';
-  $pass = '';
-  $hostDB = 'mysql:host='.$host.';dbname='.$dbName.';';
-  
-  try {
-    $conn = new PDO($hostDB, $user, $pass);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $conn;
-  } catch (PDOException $e) {
-    echo "Error de conexión: " . $e->getMessage();
-    return null;
-  }
-}
+require_once 'connectionDB.php'; // Incluir el archivo que contiene la función connectionDB()
 
 // Conexión a la base de datos
 $conn = connectionDB();
@@ -34,12 +19,11 @@ $horas_semana = $stmt->fetchAll();
 // Mostrar resultados
 echo "<h2>Total de horas trabajadas por día</h2>";
 foreach ($horas_dia as $dia) {
-  echo "Fecha: " . $dia['fecha'] . " - Total horas: " . $dia['total_horas_dia'] . "<br>";
+    echo "Fecha: " . $dia['fecha'] . " - Total horas: " . $dia['total_horas_dia'] . "<br>";
 }
-
 echo "<h2>Total de horas trabajadas por semana</h2>";
 foreach ($horas_semana as $semana) {
-  echo "Semana: " . $semana['semana'] . " - Total horas: " . $semana['total_horas_semana'] . "<br>";
+    echo "Semana: " . $semana['semana'] . " - Total horas: " . $semana['total_horas_semana'] . "<br>";
 }
 
 // Cerrar conexión
