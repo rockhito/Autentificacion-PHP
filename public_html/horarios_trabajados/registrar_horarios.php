@@ -1,3 +1,4 @@
+
 <?php
 // Incluir archivos necesarios
 include 'connectionDB.php';
@@ -13,4 +14,4 @@ include 'register_horarios_form.php';
 include 'footer.php';
 ?>
 
-<script src="validarFormulario.js"></script>
+<script src="JS/validarFormulario.js"></script>
