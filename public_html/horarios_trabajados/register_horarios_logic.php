@@ -5,6 +5,9 @@ require_once 'connectionDB.php';
 // Establecer conexión a la base de datos
 $conn = connectionDB();
 
+// Inicializar variable de registro exitoso
+$registro_exitoso = false;
+
 // Verificar si la conexión es exitosa
 if ($conn === null) {
     echo "Conexión fallida";
@@ -71,7 +74,8 @@ if ($conn === null) {
             // Reactivar comprobación de claves foráneas
             $conn->exec("SET FOREIGN_KEY_CHECKS = 1");
 
-            echo "Horarios registrados con éxito";
+            // Establecer registro exitoso a verdadero
+            $registro_exitoso = true;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -79,4 +83,10 @@ if ($conn === null) {
         echo "Error: Faltan variables;";
     }
 }
+
+// Incluir archivo que muestra resultado del registro
+require_once 'register_horarios_result.php';
+
+
 ?>
+
