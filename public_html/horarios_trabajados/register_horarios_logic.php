@@ -79,8 +79,6 @@ if ($conn === null) {
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-    } else {
-        echo "Error: Faltan variables;";
     }
 }
 

@@ -25,8 +25,8 @@
       echo "<a href='http://localhost:3000/public_html/index.php' class='boton'>Cerrar sesión</a>";
       echo "</div>";
     } else {
-      echo "<h2>Error al Registrar Horarios</h2>";
-      echo "<p>Error al registrar horarios</p>";
+      echo "<h2>Bienvenidos al modulo de registro de horarios trabajados </h2>";
+      echo "<p></p>";
     }
     ?>
   </div>
