@@ -25,45 +25,48 @@ $query = "SELECT
         FROM 
             empleados e 
         INNER JOIN 
-            horarios_trabajados ht ON (link unavailable) = ht.id_empleado 
+            horarios_trabajados ht ON e.id = ht.id_empleado 
         WHERE 
-            (link unavailable) = '$id_empleado' 
+            e.id = '$id_empleado' 
         ORDER BY 
             ht.fecha DESC";
 
-$resultado = mysqli_query($conexion, $query);
+$conexion = connectionDB(); 
+$resultado = $conexion->prepare($query); 
+$resultado->bindParam(':id_empleado', $id_empleado); 
+$resultado->execute(); 
 
-// Verificar si hay resultados
-if ($resultado && mysqli_num_rows($resultado) > 0) {
-    // Mostrar información del empleado y horas trabajadas
-    while ($fila = mysqli_fetch_assoc($resultado)) {
-        echo "<h2>Información del Empleado</h2>";
-        echo "<p>Nombre: " . $fila['nombre'] . "</p>";
-        echo "<p>Cargo: " . $fila['cargo'] . "</p>";
-        echo "<p>Ciudad: " . $fila['ciudad'] . "</p>";
-        echo "<h2>Horas Trabajadas</h2>";
-        echo "<p>Fecha: " . $fila['fecha'] . "</p>";
-        echo "<p>Hora de Entrada: " . $fila['hora_entrada'] . "</p>";
-        echo "<p>Hora de Salida: " . $fila['hora_salida'] . "</p>";
-        
-        // Botón para aprobar horas trabajadas
-        echo "<form action='' method='post'>";
-        echo "<input type='hidden' name='id_horario' value='" . $fila['id'] . "'>";
-        echo "<button type='submit' name='aprobar'>Aprobar</button>";
-        echo "</form>";
-    }
-} else {
-    echo "No hay resultados";
-}
+// Verificar si hay resultados 
+if ($resultado->rowCount() > 0) { 
+    // Mostrar información del empleado y horas trabajadas 
+    while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) { 
+        echo "<h2>Información del Empleado</h2>"; 
+        echo "<p>Nombre: " . $fila['nombre'] . "</p>"; 
+        echo "<p>Cargo: " . $fila['cargo'] . "</p>"; 
+        echo "<p>Ciudad: " . $fila['ciudad'] . "</p>"; 
+        echo "<h2>Horas Trabajadas</h2>"; 
+        echo "<p>Fecha: " . $fila['fecha'] . "</p>"; 
+        echo "<p>Hora de Entrada: " . $fila['hora_entrada'] . "</p>"; 
+        echo "<p>Hora de Salida: " . $fila['hora_salida'] . "</p>"; 
 
-// Aprobar horas trabajadas
-if (isset($_POST['aprobar'])) {
-    $id_horario = $_POST['id_horario'];
-    $query = "UPDATE horarios_trabajados SET aprobado = 1 WHERE id = '$id_horario'";
-    mysqli_query($conexion, $query);
-    echo "Horas trabajadas aprobadas con éxito";
-}
+        // Botón para aprobar horas trabajadas 
+        echo "<form action='' method='post'>"; 
+        echo "<input type='hidden' name='id_horario' value='" . $fila['id'] . "'>"; 
+        echo "<button type='submit' name='aprobar'>Aprobar</button>"; 
+        echo "</form>"; 
+    } 
+} else { 
+    echo "No hay resultados"; 
+} 
 
-mysqli_close($conexion);
+// Aprobar horas trabajadas 
+if (isset($_POST['aprobar'])) { 
+    $id_horario = $_POST['id_horario']; 
+    $query = "UPDATE horarios_trabajados SET aprobado = 1 WHERE id = :id_horario"; 
+    $resultado = $conexion->prepare($query); 
+    $resultado->bindParam(':id_horario', $id_horario); 
+    $resultado->execute(); 
+    echo "Horas trabajadas aprobadas con éxito"; 
+} 
 ?>
 
