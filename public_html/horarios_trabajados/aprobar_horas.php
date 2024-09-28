@@ -1,16 +1,14 @@
 <?php
-// Conectar con la base de datos
-
-require_once './connectionDB.php';
-
-
-// Verificar sesión del usuario
 session_start();
+
+// Verificar que la sesión esté establecida
 if (!isset($_SESSION['id_empleado'])) {
-    header('Location: ../../login.php');
+    header('Location: ../login.php');
     exit;
 }
 
+// Conectar con la base de datos
+require_once './connectionDB.php';
 // Obtener id del empleado
 $id_empleado = $_SESSION['id_empleado'];
 
