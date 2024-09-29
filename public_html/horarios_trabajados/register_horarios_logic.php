@@ -98,6 +98,6 @@ echo "Registro no exitoso";
 }
 
 // Botón para ir al módulo de aprobación
-echo "<a href='aprobar_horas.php' class='btn'>Ir al módulo de aprobación</a>";
+echo "<a href='horarios_trabajados/aprobar_horas.php' class='btn'>Ir al módulo de aprobación</a>";
 ?>
 
