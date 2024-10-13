@@ -57,8 +57,10 @@
   }
   
   .botones {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 20px;
     margin-top: 20px;
-    text-align: center;
   }
   
   .boton {
@@ -79,6 +81,29 @@
   a.boton {
     text-decoration: none;
     color: #fff;
+  }
+  
+  
+  
+  .botones form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .botones button[type="submit"] {
+    width: 80px;
+    height: 30px;
+    margin: 0 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .botones button[type="submit"]:hover {
+    background-color: #3e8e41;
   }
   
   

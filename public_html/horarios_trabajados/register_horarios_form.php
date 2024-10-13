@@ -3,7 +3,7 @@
         <?php $id_empleado = $_POST["id_empleado"]; ?>
         <div class="container">
             <h2>Registro de Horarios</h2>
-            <form id="formulario" action="horarios_trabajados/register_horarios_logic.php" method="post">
+            <form id="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <input type="hidden" name="id_empleado" value="<?php echo $id_empleado; ?>">
                 <div class="campo">
                     <label for="fecha">Fecha:</label>

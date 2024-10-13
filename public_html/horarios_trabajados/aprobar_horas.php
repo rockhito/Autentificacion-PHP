@@ -77,19 +77,18 @@ if ($resultado->rowCount() > 0) {
     // Mostrar horas trabajadas
     $resultado->execute();
     while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-      echo "<p>Fecha: " . $fila['fecha'] . "</p>";
-      echo "<p>Hora de Entrada: " . $fila['hora_entrada'] . "</p>";
-      echo "<p>Hora de Salida: " . $fila['hora_salida'] . "</p>";
-
-      // Botones para aprobar o rechazar horas trabajadas
+      echo "<div class='registro'>";
+      echo "<div class='informacion' style='display: inline-block; width: 70%'>Fecha: " . $fila['fecha'] . " | Hora de Entrada: " . $fila['hora_entrada'] . " | Hora de Salida: " . $fila['hora_salida'] . "</div>";
+      echo "<div class='botones' style='display: inline-block;'>";
       echo "<form action='' method='post'>";
       echo "<input type='hidden' name='id_horario' value='" . $fila['id'] . "'>";
       echo "<button type='submit' name='aprobar'>Aprobar</button>";
       echo "<button type='submit' name='rechazar'>Rechazar</button>";
       echo "</form>";
+      echo "</div>";
+      echo "</div>";
     }
-  } else {
-    echo "No hay resultados";
+  
   }
 
   // Aprobar o rechazar horas trabajadas
